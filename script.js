@@ -1,16 +1,18 @@
+const API_URL = "https://steep-hill-facf.jurjuroman3.workers.dev/"; // Замени на свой адрес
+
 document.addEventListener("DOMContentLoaded", () => {
     loadPlants();
 });
 
 async function loadPlants() {
-    const response = await fetch("plants.json");
+    const response = await fetch(API_URL);
     const plants = await response.json();
     displayPlants(plants);
 }
 
 function displayPlants(plants) {
     const plantList = document.getElementById("plant-list");
-    plantList.innerHTML = ""; // Очищаем список перед добавлением новых
+    plantList.innerHTML = "";
 
     plants.forEach(plant => {
         const plantCard = document.createElement("div");
@@ -26,7 +28,7 @@ function displayPlants(plants) {
 }
 
 // Форма добавления нового растения
-document.getElementById("add-plant-form").addEventListener("submit", (event) => {
+document.getElementById("add-plant-form").addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const newPlant = {
@@ -36,12 +38,16 @@ document.getElementById("add-plant-form").addEventListener("submit", (event) => 
         care: document.getElementById("plant-care").value
     };
 
-    // Загружаем существующий список и добавляем новое растение (без сохранения в файл)
-    fetch("plants.json")
-        .then(response => response.json())
-        .then(plants => {
-            plants.push(newPlant);
-            displayPlants(plants); // Обновляем на сайте
-            alert("Растение добавлено! (но после перезагрузки исчезнет)");
-        });
+    const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newPlant)
+    });
+
+    if (response.ok) {
+        loadPlants(); // Обновляем список после добавления
+        alert("Растение успешно добавлено!");
+    } else {
+        alert("Ошибка при добавлении растения.");
+    }
 });
