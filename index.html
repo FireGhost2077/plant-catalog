@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог растений</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Каталог растений</h1>
+
+    <!-- Каталог растений -->
+    <div id="plant-list"></div>
+
+    <!-- Форма добавления -->
+    <h2>Добавить новое растение</h2>
+    <form id="add-plant-form">
+        <input type="text" id="plant-name" placeholder="Название растения" required>
+        <input type="text" id="plant-image" placeholder="Ссылка на изображение" required>
+        <textarea id="plant-description" placeholder="Описание"></textarea>
+        <input type="text" id="plant-care" placeholder="Уход (например, поливать 1 раз в неделю)">
+        <button type="submit">Добавить</button>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>
