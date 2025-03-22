@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -8,19 +8,18 @@
 </head>
 <body>
     <h1>Каталог растений</h1>
-
-    <!-- Каталог растений -->
-    <div id="plant-list"></div>
-
-    <!-- Форма добавления -->
-    <h2>Добавить новое растение</h2>
-    <form id="add-plant-form">
-        <input type="text" id="plant-name" placeholder="Название растения" required>
-        <input type="text" id="plant-image" placeholder="Ссылка на изображение" required>
+    
+    <div id="plant-form">
+        <h2>Добавить растение</h2>
+        <input type="text" id="plant-name" placeholder="Название">
+        <input type="text" id="plant-image" placeholder="Ссылка на изображение">
         <textarea id="plant-description" placeholder="Описание"></textarea>
-        <input type="text" id="plant-care" placeholder="Уход (например, поливать 1 раз в неделю)">
-        <button type="submit">Добавить</button>
-    </form>
+        <textarea id="plant-care" placeholder="Уход"></textarea>
+        <button onclick="addPlant()">Добавить</button>
+    </div>
+
+    <h2>Список растений</h2>
+    <div id="plants-container"></div>
 
     <script src="script.js"></script>
 </body>
