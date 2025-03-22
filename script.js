@@ -1,18 +1,12 @@
-const API_URL = "https://steep-hill-facf.jurjuroman3.workers.dev/"; // Замени на свой адрес
+const API_URL = "https://steep-hill-facf.jurjuroman3.workers.dev/";
 
-document.addEventListener("DOMContentLoaded", () => {
-    loadPlants();
-});
-
+// Функция для загрузки растений
 async function loadPlants() {
     const response = await fetch(API_URL);
     const plants = await response.json();
-    displayPlants(plants);
-}
-
-function displayPlants(plants) {
-    const plantList = document.getElementById("plant-list");
-    plantList.innerHTML = "";
+    
+    const container = document.getElementById("plants-container");
+    container.innerHTML = ""; // Очищаем контейнер перед добавлением
 
     plants.forEach(plant => {
         const plantCard = document.createElement("div");
@@ -21,33 +15,38 @@ function displayPlants(plants) {
             <img src="${plant.image}" alt="${plant.name}">
             <h3>${plant.name}</h3>
             <p>${plant.description}</p>
-            <p><b>Уход:</b> ${plant.care}</p>
+            <p><strong>Уход:</strong> ${plant.care}</p>
         `;
-        plantList.appendChild(plantCard);
+        container.appendChild(plantCard);
     });
 }
 
-// Форма добавления нового растения
-document.getElementById("add-plant-form").addEventListener("submit", async (event) => {
-    event.preventDefault();
+// Функция для добавления растения
+async function addPlant() {
+    const name = document.getElementById("plant-name").value;
+    const image = document.getElementById("plant-image").value;
+    const description = document.getElementById("plant-description").value;
+    const care = document.getElementById("plant-care").value;
 
-    const newPlant = {
-        name: document.getElementById("plant-name").value,
-        image: document.getElementById("plant-image").value,
-        description: document.getElementById("plant-description").value,
-        care: document.getElementById("plant-care").value
-    };
+    if (!name || !image || !description || !care) {
+        alert("Заполните все поля!");
+        return;
+    }
 
+    const newPlant = { name, image, description, care };
+
+    // Отправляем данные на сервер
     const response = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newPlant)
     });
 
-    if (response.ok) {
+    const result = await response.json();
+    if (result.success) {
         loadPlants(); // Обновляем список после добавления
-        alert("Растение успешно добавлено!");
-    } else {
-        alert("Ошибка при добавлении растения.");
     }
-});
+}
+
+// Загружаем растения при старте
+window.onload = loadPlants;
