@@ -6,6 +6,18 @@
         "care": "Поливать раз в неделю."
     },
     {
+        "name": "Фикус",
+        "image": "https://fyf.tac-cdn.net/images/products/small/FYF-116.jpg?auto=webp&quality=60&width=650",
+        "description": "Комнатное растение с зелеными листьями.",
+        "care": "Поливать раз в неделю."
+    },
+    {
+        "name": "Фикус",
+        "image": "https://fyf.tac-cdn.net/images/products/small/FYF-116.jpg?auto=webp&quality=60&width=650",
+        "description": "Комнатное растение с зелеными листьями.",
+        "care": "Поливать раз в неделю."
+    },
+    {
         "name": "Алоэ",
         "image": "https://example.com/aloe.jpg",
         "description": "Лекарственное растение с толстыми листьями.",
